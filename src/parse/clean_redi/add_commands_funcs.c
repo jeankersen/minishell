@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_commands_funcs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:53:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/24 13:48:02 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:31:16 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ char	*ft_var_to_val(t_state *state, int *num, int j, int i)
 	t_cmd	*cmd;
 
 	cmd = &state->cmds[i];
+	if (ft_is_only_char(cmd->cmd_args[j], '$') == 1)
+	{
+		return cmd->cmd_args[j];
+	}
 	table = ft_split(cmd->cmd_args[j], '$');
 	if (!ft_strncmp(table[0], "?", 1))
 		return (ft_itoa(g_status));
@@ -111,13 +115,14 @@ void	ft_handle_env_varibles(t_state *state, int i, int j)
 	cmd = &state->cmds[i];
 	num[3] = 0;
 	num[4] = 0;
+
 	if (ft_handle_env_varibles_if(state, i, j) == 1)
 	{
 		num[0] = i;
 		num[1] = j;
 		num[2] = 0;
 		new = ft_var_to_val(state, num, j, i);
-		ft_free(cmd->cmd_args[j]);
+		//ft_free(cmd->cmd_args[j]);
 		cmd->cmd_args[j] = new;
 	}
 }

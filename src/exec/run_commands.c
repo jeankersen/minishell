@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:45:30 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:26:59 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:46:17 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	ft_run_commands(t_state *state)
 	if (n_cmd_bfr_pipes > -1)
 		state->nb_cmds = n_cmd_bfr_pipes;
 	if (state->nb_cmds == 1)
+	{
+
 		ft_process_command(state);
+	}
 	else
 		ft_process_commands(state);
 	dup2(state->save_stdout, STDOUT_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:21:10 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/18 08:01:07 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:16:05 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,24 @@ void	ft_cd(t_state *state)
 		ft_minishell_err(state, "minishell: cd: HOME not set\n",
 			N_HOME_UNSET_ERR);
 }
+
+/*
+
+int open_file_tmp(int in_or_out)
+{
+	int ret;
+	char *tmp_file;
+
+	ret = open(tmp_file, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	if(ret == -1)
+		exti(0);
+	return (ret);
+}
+void	ft_heredoc(t_state *state)
+{
+	int fd_out;
+
+	fd_out = open_file_tmp();
+}
+void here_doc(char **av)
+*/

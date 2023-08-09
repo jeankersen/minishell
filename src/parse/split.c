@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:29:36 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/07/25 14:48:18 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/09 08:57:58 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ t_node	*ft_get_tokens(char *args)
 		while (args[i] == '\"' || args[i] == '\'')
 		{
 			i = ft_quotes(args, i);
+			printf(" arg[i] from ft_get_tokens: %c\n", args[i]);
 			if (i == -1)
-				exit(1);
+				exit(1); // gerer exit quand unclosed quotes
 		}
 		if (ft_is_splitable(args[i]))
 		{
@@ -87,6 +88,8 @@ t_node	*ft_get_tokens(char *args)
 	}
 	if (!ft_is_splitable(args[i - 1]))
 		ft_lst_add_back(&tmp, ft_substr(args, start, (i - start)));
+	ft_view_node(tmp);
 	ft_delete_head(&tmp);
 	return (tmp);
 }
+

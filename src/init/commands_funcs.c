@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_funcs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:21:32 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:30:19 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/07 11:32:50 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
