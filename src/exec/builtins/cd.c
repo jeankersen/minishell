@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:21:10 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/07 09:16:05 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/11 15:03:45 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_cd(t_state *state)
 	if (path != NULL && chdir(path) == 0)
 		ft_cd_utils(state);
 	else if (path != NULL)
-		ft_minishell_err(state, "minishell: cd: HOME not set\n",
+		ft_minishell_err(state, "minishell: cd: PATH not found\n",
 			N_HOME_UNSET_ERR);
 }
 
