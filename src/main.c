@@ -6,13 +6,15 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/09 09:34:54 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 11:18:51 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int		g_status;
+
+
 
 /// @brief 	Increments SHLVL each time a state is initialized
 /// @param state
@@ -63,7 +65,7 @@ void	ft_sigint_handler(int signum)
 void	  ft_run_code(char *line, t_state *state, t_node *tokens)
 {
 	state->error = 0;
-	tokens = ft_get_tokens(line);// mettre chaque mot du prompt dans structure t_node
+	tokens = ft_get_tokens(line, state);// mettre chaque mot du prompt dans structure t_node
 	state->nb_cmds = ft_get_nb_cmds_pipe(tokens); // pipe ne peut pas prouver le le
 	// nombre de command a ell seule. ex: echo |
 	if (ft_unexptd_token_check(tokens) == 0
@@ -91,7 +93,7 @@ void	  ft_run_code(char *line, t_state *state, t_node *tokens)
 
 void	ft_init_state(t_state *state, char **envp)
 {
-	state->g_env = NULL;
+	//state->g_env = NULL;
 	state->g_env = ft_get_env(envp, 1, -1);
 	state->t_redirection = NULL;
 	state->cmds = NULL;
@@ -112,16 +114,29 @@ int ft_is_space(char *line)
 	i = 0;
 	int size = ft_strlen(line);
 	int j = 0;
-	while (line[i])
+
+
+	while (line[i] != '\0')
 	{
 		if(line[i] == ' ' || line[i] == '\t')
 			j++;
 		i++;
 	}
+
 	if(j == size)
 		return (1);
 	else
 		return (0);
+}
+
+int ft_str_size(char *str) {
+    int count = 0;
+	if(!str)
+		return (0);
+    while (str[count]) {
+        count++;
+    }
+    return count;
 }
 
 
@@ -131,15 +146,21 @@ int	main(int argc, char **argv, char **envp)
 	t_node	tokens;
 	char	*line;
 
+	line = NULL;
+
 	(void)argc;
 	(void)argv;
 	ft_init_state(&state, envp);
 	while (state.stop != STOP)
 	{
-		signal(SIGINT, ft_sigint_handler);
+		signal(SIGINT, ft_sigint_handler); //	printf("\nCTR-C\n");
 		signal(SIGQUIT, SIG_IGN);
-		line = readline(ANSI_COLOR_MAGENTA "minishell$ ");
-		if (line && *line &&  ft_is_space(line) == 0)
+
+		//line = (char *)malloc(sizeof(line));
+		line = readline(ANSI_COLOR_MAGENTA "minishell$ " ANSI_COLOR_RESET);
+
+		//printf("%d\n", ft_str_size(line));
+		if (line && *line)
 		{
 			add_history(line);
 			ft_run_code(line, &state, &tokens);
@@ -148,6 +169,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		ft_free(line);
 	}
+	//signal(SIGQUIT, SIG_IGN);
 	ft_free_str_table(state.g_env);
 	rl_clear_history();
 	exit(state.error);

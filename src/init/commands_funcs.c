@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:21:32 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/07 11:32:50 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:51:00 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	ft_cmd_args_in_red_divi(t_state *state, int i, int *start)
 	t_cmd	*cmd;
 
 	cmd = &state->cmds[i];
+	//printf("-- \ntest0\n --");
 	position_redi = ft_position_in_token(state->tokens,
 			state->t_redirection[cmd->redirect[cmd->i_redi]],
 			i, start);
@@ -114,7 +115,9 @@ void	ft_cmd_args_in_red_divi(t_state *state, int i, int *start)
 	if (position_redi >= ft_tokens_size(state->tokens) - 2)
 	{
 		state->cmds[i].cmd_args = NULL;
+		//printf("\ncommands_funcs: cmd_args_in_red_divi\n");
 		ft_minishell_err(state, M_UNXPTD_TOKEN_ERR, N_UNXPTD_TOKEN_ERR);
+		state->error++;
 		return ;
 	}
 	position_redi++;

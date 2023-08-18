@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:12:16 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/07 14:45:27 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/17 15:56:44 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ int	ft_get_nb_cmds_pipe(t_node *list)
 	while (token)
 	{
 		if (ft_strncmp(token->content, "|\0",
-				2) == 0)//* pas besoi
+				2) == 0 || ft_strncmp(token->content, "||\0", 2) == 0)
 			i++;
 		token = token->next;
 	}
-	//printf("\n nbr commande pipe: %d\n", i);
 	return (i);
 }

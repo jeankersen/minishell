@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:21:10 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/11 15:03:45 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:50:11 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_pwd(t_state *state)
 	str_tem = getcwd(NULL, 0);
 	if (!str_tem)
 	{
+		//printf("\ncd.c: ft_pwd\n");
 		ft_minishell_err(state, M_PATH_ERR, N_PATH_ERR);
 		return ;
 	}
@@ -50,27 +51,70 @@ void	ft_cd_utils(t_state *state)
 	ft_free(tmp_cmd);
 }
 
-void	ft_cd(t_state *state)
-{
-	char	**past;
-	char	*path;
 
-	past = state->cmds[state->index].cmd_args;
-	if (ft_arr_size(past) == 1)
+void    ft_cd(t_state *state)
+{
+    char    **past;
+    char    *path;
+    past = state->cmds[state->index].cmd_args;
+    if (ft_arr_size(past) == 1)
+    {
+        //printf("\noooooOOOOOO\n");
+        path = ft_find_env_value(state->g_env, "HOME=");
+		//printf(" voici le path == 1: %s\n", path);
+        if (!path)
+		{
+        	    ft_minishell_err(state, "minishell: cd: HOME not set\n",
+                N_HOME_UNSET_ERR);
+				g_status = 256;
+    	}
+
+		}
+    if (ft_arr_size(past) >= 2)
 	{
-		path = ft_find_env_value(state->g_env, "HOME=");
-		if (!path)
-			ft_minishell_err(state, "minishell: cd: HOME not set\n",
-				N_HOME_UNSET_ERR);
+        path = state->cmds[state->index].cmd_args[1];
+		//printf(" voici le SIZE > = 2path >= 2: %s\n", path);
+
 	}
-	if (ft_arr_size(past) >= 2)
-		path = state->cmds[state->index].cmd_args[1];
-	if (path != NULL && chdir(path) == 0)
-		ft_cd_utils(state);
-	else if (path != NULL)
-		ft_minishell_err(state, "minishell: cd: PATH not found\n",
-			N_HOME_UNSET_ERR);
+	//printf(" voici le SIZE APRS LE SIZE >2: %s\n", path);
+    if (path != NULL)
+	{
+		if(chdir(path) == 0)
+        	ft_cd_utils(state);
+		else
+		{
+
+			//printf(" voici le path 3: %s\n", path);
+			//if(ft_strcmp(path, "cd HOME") == 0)
+				//printf("\n home found\n");
+			//if(ft_strcmp(path, "cd $HOME") == 0)
+				//printf("\n $home found\n");
+			//printf("\nwwwwwwwwwww state->cmds[state->index].cmd_args[0]: %s\n", state->cmds[state->index].cmd_args[0]);
+			//printf("\nwwwwwwwwwww state->cmds[state->index].cmd_args[1]: %s\n", state->cmds[state->index].cmd_args[1]);
+			min_shell_err(state, "cd", strerror(errno), N_ENV_PATH_ERR);
+			g_status = 256;
+		}
+
+	}
+	/*
+	if (path != NULL)
+	{
+
+
+		if(ft_strcmp(path, "HOME") == 0)
+			 printf("\nwwwwwwwwwww ho me found\n");
+
+
+
+		min_shell_err(state, strerror(errno), N_ENV_PATH_ERR);
+		//fprintf(stderr, "Error: %s\n", strerror(errno));
+
+	}
+
+	*/
 }
+
+
 
 /*
 

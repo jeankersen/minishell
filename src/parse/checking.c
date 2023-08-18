@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:15:39 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/08 12:07:35 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:51:14 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_check_other_pipes(t_state *state)
 				"|", 1) == 0)
 		{
 			//printf("\n annothe term\n"); example echo |
+			//printf("\nchecking.c: check_other_pipes\n");
 			ft_minishell_err(state, M_TOKENS_ERR, N_TOKENS_ERR);
 			return ;
 		}
@@ -74,6 +75,7 @@ int	ft_unexptd_token_check(t_node *list)
 			temp = temp->next;
 			if (*temp->content == c)
 			{
+				//printf("\nchecking.c: unexptd_token_check\n");
 				printf("minishell: syntax error near unkjkexpected token '%c'\n",
 					c); // si il y a une triple character dans content,  ex: <<<
 				return (1);

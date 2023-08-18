@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:24:12 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/07/26 09:27:07 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:48:41 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_execve_no_path(t_state *state)
 
 	erro_path = ft_calloc(sizeof(char *), 2);
 	erro_path[0] = ft_strdup("PATH");
+	//printf("\nexecve.c: ft_execve_no_path\n");
 	ft_minishell_err(state, M_ENV_PATH_ERR, N_ENV_PATH_ERR);
 	ft_free_str_table(erro_path);
 	ft_close_fd();
@@ -78,7 +79,9 @@ int	ft_execve(t_state *state)
 	ft_execve_get_path(state, i);
 	if (!state->cmds[i].cmd)
 	{
-		ft_minishell_err(state, M_PATH_ERR, N_PATH_ERR);
+		//printf("\nexecve.c: ft_execve\n");
+		//ft_minishell_err(state, M_PATH_ERR, N_PATH_ERR);
+		err_mini(state, state->cmds[i].cmd_args[0], M_PATH_ERR, N_PATH_ERR);
 		ft_close_fd();
 		exit(errno);
 	}

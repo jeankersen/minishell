@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:15:25 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/07 11:04:14 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/17 18:52:47 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	ft_run_builtin(t_state *state)
 		ft_pwd(state);
 	else if (ft_strncmp(command, "cd\0", 3) == 0)
 		ft_cd(state);
-	else if (ft_strncmp(command, "<<\0", 3) == 0)
-		ft_heredoc();
 	else
 		return (0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:35:48 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/07/25 14:49:18 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/18 08:50:36 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_run_execve(t_state *state)
 	int	error;
 
 	error = ft_execve(state);
+	//printf("\nprocess_cmds.c: ft_run_execve\n");
 	ft_minishell_err(state, M_PIPE_EXECVE_ERR, N_PIPE_EXECVE_ERR);
 	ft_close_fd();
 	g_status = error;
@@ -76,7 +77,10 @@ void	ft_process_commands(t_state *state)
 	state->index = 0;
 	state->pid = ft_calloc(sizeof(pid_t), state->nb_cmds);
 	if (!state->pid)
+	{
+		//printf("\nprocess_cmds: ft_process_commands\n");
 		ft_minishell_err(state, M_PIPE_ERR, N_PIPE_ERR);
+	}
 	ft_run_childs(state);
 	ft_wait_childs(state);
 	ft_free(state->pid);

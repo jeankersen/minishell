@@ -6,13 +6,13 @@
 #    By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 20:37:11 by anshimiy          #+#    #+#              #
-#    Updated: 2023/07/13 10:02:26 by jvillefr         ###   ########.fr        #
+#    Updated: 2023/08/16 09:33:33 by jvillefr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # VARS
 PROJECT	:=	minishell
-CC		:=	gcc -g -Wall -Werror -Wextra #-lreadline, gdb debug enabled
+CC		:=	gcc -g -Wall -Werror -Wextra  #-lreadline, gdb debug enabled
 RM		:=	rm -f
 READLINE = ./includes/readline/libreadline.a ./includes/readline/libhistory.a -lreadline -lcurses
 MY_LIB	:=	./includes/my_lib
@@ -81,5 +81,7 @@ re: fclean all
 
 norm:
 	@norminette $(SRC) ./includes/minishell.h ./includes/my_lib/
+check_leak:
+	@valgrind --show-leak-kinds=all --track-origins=yes --trace-children=yes --leak-check=full --track-fds=yes --suppressions=supp.txt ./minishell
 
 .PHONY: all clean fclean re norm

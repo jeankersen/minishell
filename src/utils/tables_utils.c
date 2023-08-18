@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:04:41 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/08 11:58:30 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/17 19:23:15 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,17 @@ char	*ft_find_env_value(char **envp, char *path)
 		i++;
 	if (i == size)
 		return (NULL);
+
 	return (envp[i] + j);
 }
 
 int	ft_is_splitable(char c)
 {
 	if (c == ' ' || c == '<' || c == '>' || c == '|')
+	{
+		//printf("ft_is_splitable: %c", c);
 		return (1);
+	}
 	return (0);
 }
 
