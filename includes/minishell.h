@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 08:10:38 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:22:40 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,9 +203,12 @@ char 				*to_free_3, char *to_return);
 
 						void ft_view_node(t_node *tokens);
 				void		ft_view_tcmd(t_cmd *cmd);
+
+				void	ft_sigint_handler(int signum);
 				void	ft_heredoc(void);
 				void ft_view_state(t_state *state);
 				void	signal_heredoc(int sig);
 				void	min_shell_err(t_state *state, char *cmd, char *msg, int err);
 				void	err_mini(t_state *state, char *arg, char *msg_error, int err);
+				void	err_mini_exit(t_state *state, char *arg, char *msg_error, int err);
 #endif
