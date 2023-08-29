@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 11:18:51 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:22:25 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_shlvl_increment(t_state *state)
 void	ft_sigint_handler(int signum)
 {
 	(void)signum;
+	//printf("\n CTR-C\n");
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -82,8 +83,10 @@ void	  ft_run_code(char *line, t_state *state, t_node *tokens)
 		//printf("\n44444444\n");
 		ft_run_commands(state);
 		//printf("\n555555555\n");
+		//printf("\n avnt fonction update -g_status: %d\n", g_status);
 		ft_update_g_status();
 		//printf("\n6666666\n");
+		//printf("\n2-g_status: %d\n", g_status);
 		ft_check_exit(state);
 		//printf("\n7777777\n");
 	}

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:29:36 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 11:18:33 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:22:55 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ t_node	*ft_get_tokens(char *args, t_state *state)
 	while (args && args[++i])
 	{
 		//printf("\n11111111\n");
-		while (args[i] == '\"' || args[i] == '\'')
+		if (args[i] == '\"' || args[i] == '\'')
 		{
 			i = ft_quotes(args, i);
 			if (i == -1)

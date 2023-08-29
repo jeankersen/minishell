@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:18:13 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/17 18:46:58 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:22:10 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	ft_save_type_redirection(t_state *state, int i)
 	}
 	return (0);
 }
+
 
 char	**ft_content_tokens(t_state *state, int number_pipe, t_node *list)
 {
@@ -132,7 +133,7 @@ void	ft_create_cmds_array(t_state *state)
 		}
 		i++;
 	}
-	printf("\n commands.c test 6\n");
+	//printf("\n commands.c test 6\n");
 	//ft_view_state(state);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:45:30 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 11:19:15 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/25 10:09:57 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	ft_run_commands(t_state *state)
 		state->nb_cmds = n_cmd_bfr_pipes;
 	if (state->nb_cmds == 1)
 	{
-		printf("\n***\n");
+		//printf("\nsimple command\n");
 		ft_process_command(state);
 	}
 	else
 	{
-		//printf("\n111111\n");
+		//printf("\ncomplx command\n");
 		ft_process_commands(state);
 	}
 	//printf("\n111111\n");

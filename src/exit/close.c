@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:25:35 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:00:41 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/25 09:31:50 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ void	ft_close_fd(void)
 	int	i;
 
 	i = 2;
-	while (++i < 200)
+	while (++i < 50)
+	{
 		close(i);
+	}
 }
+
+
+
 
 void	ft_check_exit(t_state *state)
 {
