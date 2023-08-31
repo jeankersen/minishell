@@ -118,6 +118,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		ft_free(line);
 	}
-	done(&state);
+	ft_done(&state);
 	return (0);
 }
