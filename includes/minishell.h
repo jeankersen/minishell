@@ -212,4 +212,5 @@ char 				*to_free_3, char *to_return);
 				void	err_mini(t_state *state, char *arg, char *msg_error, int err);
 				void	err_mini_exit(t_state *state, char *arg, char *msg_error, int err);
 				void	ft_done(t_state *state);
+				void	ft_var_to_val_mor(char *new, char **table, int i);
 #endif
