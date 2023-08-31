@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:21:44 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 08:50:18 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:53:05 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_env_export_check(char *str, t_state *state)
 {
 	if (ft_isalpha(str[0]) == 0 && str[0] != '_')
 	{
-		//printf("\n env.c: ft_env_export\n");
 		ft_minishell_err(state, M_EXPORT_ERR, N_EXPORT_ERR);
 		return (1);
 	}

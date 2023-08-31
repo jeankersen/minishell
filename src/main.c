@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/25 10:22:25 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 13:17:41 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 int		g_status;
 
-
-
 /// @brief 	Increments SHLVL each time a state is initialized
 /// @param state
 void	ft_shlvl_increment(t_state *state)
 {
 	char	**past;
-	char	*str_num; // on pourrait s'en servir pour mettre le result de la fonction
+	char	*str_num;
 	int		num;
-	// la fonction ft_find_env est utilise 3 fois avec les memes parametres
+
 	if (ft_find_env_value(state->g_env, "SHLVL=") != NULL
 		&& ft_strlen(ft_find_env_value(state->g_env, "SHLVL=")) > 0)
 	{
 		num = ft_atoi(ft_find_env_value(state->g_env, "SHLVL="));
 		num++;
-		str_num = ft_itoa(num); // avait-on vraiment besoin de ca? num est deja un char * du resultat SHVL=
+		str_num = ft_itoa(num);
 		past = ft_calloc(sizeof(char *), 3);
 		past[0] = ft_strdup("1");
 		past[1] = ft_strjoin("SHLVL=", str_num);
@@ -42,7 +40,6 @@ void	ft_shlvl_increment(t_state *state)
 void	ft_sigint_handler(int signum)
 {
 	(void)signum;
-	//printf("\n CTR-C\n");
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -63,40 +60,27 @@ void	ft_sigint_handler(int signum)
  * @param 	*tokens:
  * @retval	None
 */
-void	  ft_run_code(char *line, t_state *state, t_node *tokens)
+void	ft_run_code(char *line, t_state *state, t_node *tokens)
 {
 	state->error = 0;
-	tokens = ft_get_tokens(line, state);// mettre chaque mot du prompt dans structure t_node
-	state->nb_cmds = ft_get_nb_cmds_pipe(tokens); // pipe ne peut pas prouver le le
-	// nombre de command a ell seule. ex: echo |
+	tokens = ft_get_tokens(line, state);
+	state->nb_cmds = ft_get_nb_cmds_pipe(tokens);
 	if (ft_unexptd_token_check(tokens) == 0
 		&& state->nb_cmds > 0 && state->error == 0)
 	{
 		state->tokens = tokens;
-		//printf("\n1111111\n");
 		ft_check_pipes(state);
-		//printf("\n222222222\n");
 		ft_create_cmds_array(state);
-
-		//printf("\n3333333\n");
-		ft_add_info_commands(state); // <<
-		//printf("\n44444444\n");
+		ft_add_info_commands(state);
 		ft_run_commands(state);
-		//printf("\n555555555\n");
-		//printf("\n avnt fonction update -g_status: %d\n", g_status);
 		ft_update_g_status();
-		//printf("\n6666666\n");
-		//printf("\n2-g_status: %d\n", g_status);
 		ft_check_exit(state);
-		//printf("\n7777777\n");
 	}
 	ft_lst_free(tokens);
 }
 
-
 void	ft_init_state(t_state *state, char **envp)
 {
-	//state->g_env = NULL;
 	state->g_env = ft_get_env(envp, 1, -1);
 	state->t_redirection = NULL;
 	state->cmds = NULL;
@@ -110,39 +94,6 @@ void	ft_init_state(t_state *state, char **envp)
 	ft_shlvl_increment(state);
 }
 
-int ft_is_space(char *line)
-{
-	int i;
-
-	i = 0;
-	int size = ft_strlen(line);
-	int j = 0;
-
-
-	while (line[i] != '\0')
-	{
-		if(line[i] == ' ' || line[i] == '\t')
-			j++;
-		i++;
-	}
-
-	if(j == size)
-		return (1);
-	else
-		return (0);
-}
-
-int ft_str_size(char *str) {
-    int count = 0;
-	if(!str)
-		return (0);
-    while (str[count]) {
-        count++;
-    }
-    return count;
-}
-
-
 int	main(int argc, char **argv, char **envp)
 {
 	t_state	state;
@@ -150,19 +101,14 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 
 	line = NULL;
-
 	(void)argc;
 	(void)argv;
 	ft_init_state(&state, envp);
 	while (state.stop != STOP)
 	{
-		signal(SIGINT, ft_sigint_handler); //	printf("\nCTR-C\n");
+		signal(SIGINT, ft_sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
-
-		//line = (char *)malloc(sizeof(line));
-		line = readline(ANSI_COLOR_MAGENTA "minishell$ " ANSI_COLOR_RESET);
-
-		//printf("%d\n", ft_str_size(line));
+		line = readline("minishell$ ");
 		if (line && *line)
 		{
 			add_history(line);
@@ -172,10 +118,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		ft_free(line);
 	}
-	//signal(SIGQUIT, SIG_IGN);
-	ft_free_str_table(state.g_env);
-	rl_clear_history();
-	exit(state.error);
+	done(&state);
 	return (0);
 }
-

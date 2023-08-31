@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:18:13 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/25 10:22:10 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:18:44 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	ft_save_type_redirection(t_state *state, int i)
 	return (0);
 }
 
-
 char	**ft_content_tokens(t_state *state, int number_pipe, t_node *list)
 {
 	t_node	*aff;
@@ -90,7 +89,6 @@ void	ft_cmd_args_in_redirection(t_state *state, int i)
 			+ 1);
 	cmd->i_redi = 0;
 	size_copy = -1;
-	//printf("\ntest1\n");
 	while (cmd->i_redi < cmd->n_of_redi - 1)
 	{
 		ft_cmd_args_in_red_divi(state, i, &size_copy);
@@ -117,27 +115,21 @@ void	ft_create_cmds_array(t_state *state)
 		state->cmds[i].id = i;
 		state->cmds[i].fd_file = -1;
 		ft_create_array(state, &state->cmds[i]);
-		ft_save_type_redirection(state, i); // fait rien
-		//printf("\ntest 4\n");
-		if (state->cmds[i].redirect[0] >= 0) // cette condition tjrs vrai?
+		ft_save_type_redirection(state, i);
+		if (state->cmds[i].redirect[0] >= 0)
 		{
-			//printf("\ntest 2\n");
 			ft_cmd_args_in_redirection(state, i);
 		}
 		else
 		{
-			//printf("\ntest 5\n");
 			state->cmds[i].t_redirection = ft_calloc(sizeof(char *), 1);
 			state->cmds[i].cmd_args = ft_content_tokens(state, i,
 					state->tokens);
 		}
 		i++;
 	}
-	//printf("\n commands.c test 6\n");
-	//ft_view_state(state);
 }
-
-
+/*
 void ft_view_tcmd(t_cmd *cmd)
 {
 
@@ -178,17 +170,7 @@ void ft_view_state(t_state *state)
 		printf("\n**************\n");
 		i++;
 	}
-
-	/*
-    printf("save_stdout: %d\n", state->save_stdout);
-    printf("save_stdin: %d\n", state->save_stdin);
-    printf("index: %d\n", state->index);
-    printf("error: %d\n", state->error);
-    printf("stop: %d\n", state->stop);
-	*/
 }
-
-
 
 void ft_view_node(t_node *list)
 {
@@ -204,3 +186,6 @@ void ft_view_node(t_node *list)
              token = token->next;
           }
 }
+
+
+*/

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 10:00:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 08:51:26 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:32:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_create_herodoc_utils(t_cmd *cmd)
 {
 	char	*str;
-	//printf("\n ft_create_herodoc_utils\n");
+
 	str = readline("> ");
 	while (str && ft_strcmp(str, cmd->t_redirection[cmd->i_redi]) != 0)
 	{
@@ -46,13 +46,11 @@ void	ft_create_herodoc(t_state *state, int index)
 	cmd->fd_file = open(file, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	if (cmd->fd_file < 0)
 	{
-		//printf("\ncheredoc.c: create_heredoc\n");
 		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
 		ft_free(file);
 		return ;
 	}
 	ft_create_herodoc_utils(cmd);
 	close(cmd->fd_file);
-	//printf("\nft_create_heredoc: heredoc.c\n");
 	ft_free(file);
 }

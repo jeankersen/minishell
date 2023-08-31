@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:00 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/07 11:06:46 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:57:49 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,4 @@ void	ft_print_table(char **str, int new_line)
 	}
 	if (new_line == 2)
 		printf("\n");
-}
-
-void	ft_heredoc(void)
-{
-
-	printf("hello worl\n");
-
-	/*
-
-
-	char input[MAX_INPUT_LENGTH];
-    const char *delimiter = "bla";
-
-    while (1) {
-        fgets(input, sizeof(input), stdin);
-
-        // Supprimer le saut de ligne à la fin de l'entrée
-        size_t input_length = strlen(input);
-        if (input_length > 0 && input[input_length - 1] == '\n') {
-            input[input_length - 1] = '\0';
-        }
-
-        if (strcmp(input, delimiter) == 0) {
-            break;
-        }
-
-        // Traitez l'entrée (vous pouvez effectuer n'importe quelle action souhaitée ici)
-        printf("%s\n", input);
-    }
-	*/
 }

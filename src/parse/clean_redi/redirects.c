@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:59:00 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/18 08:52:12 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:34:20 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ void	ft_less_than(t_state *state)
 	pos = cmd->i_redi;
 	if (cmd->t_redirection[pos] && access(cmd->t_redirection[pos], F_OK) == -1)
 	{
-		//printf("\nredirect.c: less_than\n");
 		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
 		return ;
 	}
-
 	cmd->fd_file = open(cmd->t_redirection[pos], O_RDONLY, 0644);
 	if (!cmd->fd_file)
 	{
@@ -62,29 +60,26 @@ void	ft_two_less_than(t_state *state)
 	char	*tmp_file_id;
 	char	*cmd_id;
 	char	*i_redi;
+
 	cmd = &state->cmds[state->index];
 	cmd_id = ft_itoa(cmd->id);
 	i_redi = ft_itoa(cmd->i_redi);
 	tmp_file_id = ft_strjoin(cmd_id, i_redi);
 	file = ft_strjoin(".tmp_heredoc", tmp_file_id);
-	//printf("\ngft_two_less_than: redirects.c\n");
-	//ft_putstr_fd(file, cmd->fd_file);
 	ft_free(cmd_id);
 	ft_free(i_redi);
 	ft_free(tmp_file_id);
 	cmd->fd_file = open(file, O_RDONLY, 0644);
 	if (cmd->fd_file < 0)
 	{
-		//makeprintf("\nredirect.c: two_less_than\n");
 		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
 	}
-
 	ft_free(file);
 	dup2(cmd->fd_file, STDIN_FILENO);
 }
 
 // >>
-void	  ft_two_greater_than(t_state *state, int is_dup2)
+void	ft_two_greater_than(t_state *state, int is_dup2)
 {
 	int		index;
 	t_cmd	*cmd;
@@ -129,6 +124,5 @@ int	ft_on_redirection(t_state *state)
 			ft_two_greater_than(state, 1);
 		cmd->i_redi++;
 	}
-
 	return (1);
 }

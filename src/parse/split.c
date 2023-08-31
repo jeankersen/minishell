@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:29:36 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/25 10:22:55 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:54:11 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,18 @@
 // 3) If the current character is not a space, create a new token
 int	ft_create_token(char *args, int i, int start, t_node *list)
 {
-
-
-	if(i >= 1)
+	if (i >= 1)
 	{
-
-	if ( args[i -1] && !ft_is_splitable(args[i - 1]))
-	{
-		//printf("creat token: ");
-		//printf("\nAAAAAAAA\n");
-		ft_lst_add_back(&list, ft_substr(args, start, (i - start)));
-		start = i;
+		if (args[i -1] && !ft_is_splitable(args[i - 1]))
+		{
+			ft_lst_add_back(&list, ft_substr(args, start, (i - start)));
+			start = i;
+		}
 	}
-	}
-
-	if (args[i + 1] && args[i]  && args[i] == args[i + 1])
+	if (args[i + 1] && args[i] && args[i] == args[i + 1])
 		i++;
-	if ( args[i] && args[i] != ' ')
+	if (args[i] && args[i] != ' ')
 	{
-		//printf("\nBBBBBBBBBBBB\n");
 		ft_lst_add_back(&list, ft_substr(args, start, (i - start + 1)));
 	}
 	return (i);
@@ -75,6 +68,17 @@ int	ft_quotes(char *args, int i)
 //  create a new token from the substring
 // - between the last separator and the end of the string
 // call ft_lst_add_back to create a new token from the remaining substring
+int	ft_get_tokens_mor(t_state *state, char *args, int i)
+{
+	i = ft_quotes(args, i);
+	if (i == -1)
+	{
+		state->error++;
+		return (0);
+	}
+	return (1);
+}
+
 t_node	*ft_get_tokens(char *args, t_state *state)
 {
 	t_node	*tmp;
@@ -86,40 +90,20 @@ t_node	*ft_get_tokens(char *args, t_state *state)
 	ft_init_tmp_head(&tmp);
 	while (args && args[++i])
 	{
-		//printf("\n11111111\n");
 		if (args[i] == '\"' || args[i] == '\'')
-		{
-			i = ft_quotes(args, i);
-			if (i == -1)
-				{
-					state->error++;
-					break;
-				}
-		//printf("\n222222222\n");
-		}
-		//printf("\n33333333\n");
+			if (ft_get_tokens_mor(state, args, i) == 0)
+				break ;
 		if (ft_is_splitable(args[i]))
 		{
-			//printf("\n44444444444444444\n");
 			i = ft_create_token(args, i, start, tmp);
 			start = i + 1;
 		}
 	}
-	//printf("\n5555555555555555\n");
 	if (!ft_is_splitable(args[i - 1]))
-	{
-		//printf("\n66666666666666666\n");
-		//printf("\n\n");
 		ft_lst_add_back(&tmp, ft_substr(args, start, (i - start)));
-	}
-	//printf("\n777777777777\n");
 	ft_delete_head(&tmp);
-	//ft_view_node(tmp);
 	return (tmp);
 }
-
-
-
 
 /*
 

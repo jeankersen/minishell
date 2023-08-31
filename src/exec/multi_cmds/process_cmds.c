@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:35:48 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/25 10:09:50 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:12:22 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_run_execve(t_state *state)
 	int	error;
 
 	error = ft_execve(state);
-	//printf("\nprocess_cmds.c: ft_run_execve\n");
 	ft_minishell_err(state, M_PIPE_EXECVE_ERR, N_PIPE_EXECVE_ERR);
 	ft_close_fd();
 	g_status = error;
@@ -34,15 +33,11 @@ void	ft_run_one_child(t_state *state, int *fd)
 		dup2(fd[1], STDOUT_FILENO);
 	}
 	ft_on_redirection(state);
-	//printf("\nrun one child for complx cmf\n");
 	if (ft_run_builtin(state) == 0)
 	{
-		//printf("\nbuilt complx\n");
 		ft_run_execve(state);
-
 	}
 	ft_close_fd();
-	//printf("\n1-g_status: %d\n", g_status);
 	exit(g_status);
 }
 
@@ -51,40 +46,31 @@ void	ft_run_childs(t_state *state)
 	int	fd[2];
 
 	state->index = 0;
-	//printf("\n run_childs 1\n");
 	while (state->index < state->nb_cmds && state->error == 0)
 	{
 		pipe(fd);
 		state->pid[state->index] = fork();
-		//printf("\n run_childs 2\n");
 		if (state->pid[state->index] == 0)
 		{
-
 			ft_run_one_child(state, fd);
 		}
 		else if (state->index < state->nb_cmds)
 		{
-			//printf("\nclose fd\n");
-
+			close(fd[1]);
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
-
 		}
 		else
 		{
-			//printf("\ncsignal sing int\n");
 			signal(SIGINT, SIG_IGN);
-
 		}
 		state->index++;
 	}
-
 }
 
 void	ft_wait_childs(t_state *state)
 {
 	state->index = 0;
-	//printf("\n inside ft_wait_childs\n");
 	while (state->index < state->nb_cmds)
 	{
 		waitpid(state->pid[state->index], &g_status, 0);
@@ -92,20 +78,15 @@ void	ft_wait_childs(t_state *state)
 	}
 }
 
-
 void	ft_process_commands(t_state *state)
 {
 	state->index = 0;
 	state->pid = ft_calloc(sizeof(pid_t), state->nb_cmds);
 	if (!state->pid)
 	{
-		//printf("\nprocess_cmds: ft_process_commands\n");
 		ft_minishell_err(state, M_PIPE_ERR, N_PIPE_ERR);
 	}
-
 	ft_run_childs(state);
-	//printf("\n ft_process_commmands before ft_wait_child\n");
 	ft_wait_childs(state);
-	//printf("\n ft_process_commmands after ft_wait_child\n");
 	ft_free(state->pid);
 }

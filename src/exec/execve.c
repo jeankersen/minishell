@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:24:12 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/25 10:09:25 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:30 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_execve_no_path(t_state *state)
 
 	erro_path = ft_calloc(sizeof(char *), 2);
 	erro_path[0] = ft_strdup("PATH");
-	//printf("\nexecve.c: ft_execve_no_path\n");
 	ft_minishell_err(state, M_ENV_PATH_ERR, N_ENV_PATH_ERR);
 	ft_free_str_table(erro_path);
 	ft_close_fd();
@@ -58,12 +57,12 @@ void	ft_execve_get_path(t_state *state, int i)
 {
 	char	*env_path;
 	char	**cmd_paths;
+
 	env_path = ft_find_env_value(state->g_env, "PATH=");
 	cmd_paths = ft_split(env_path, ':');
 	state->cmds[i].cmd = ft_get_command_path(cmd_paths,
 			state->cmds[i].cmd_args[0]);
 	cmd_paths = (char **)ft_free_str_table(cmd_paths);
-	//printf("\n cat1 \n");
 }
 
 int	ft_execve(t_state *state)
@@ -76,24 +75,14 @@ int	ft_execve(t_state *state)
 		return (ft_execve_direction(state, i));
 	if (ft_find_env_value(state->g_env, "PATH=") == NULL)
 		ft_execve_no_path(state);
-
 	ft_execve_get_path(state, i);
-	//printf("\n cat 2\n");
 	if (!state->cmds[i].cmd)
 	{
-		// Juin --
-		//printf("\nexecve.c: ft_execve\n");
-		//ft_minishell_err(state, M_PATH_ERR, N_PATH_ERR);
 		err_mini(state, state->cmds[i].cmd_args[0], M_PATH_ERR, N_PATH_ERR);
 		ft_close_fd();
-		//printf("\n cat 3 \n");
 		exit(errno);
 	}
-	//printf("\n cat 4 \n");
 	ft_close_fd();
-	//printf("\n cat 5 \n");
-
-	error = execve(state->cmds[i].cmd, state->cmds[i].cmd_args, state->g_env);// ls
-	//printf("\n cat 6\n");
+	error = execve(state->cmds[i].cmd, state->cmds[i].cmd_args, state->g_env);
 	return (error);
 }
