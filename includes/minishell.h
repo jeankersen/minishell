@@ -211,4 +211,5 @@ char 				*to_free_3, char *to_return);
 				void	min_shell_err(t_state *state, char *cmd, char *msg, int err);
 				void	err_mini(t_state *state, char *arg, char *msg_error, int err);
 				void	err_mini_exit(t_state *state, char *arg, char *msg_error, int err);
+				void	ft_done(t_state *state);
 #endif
