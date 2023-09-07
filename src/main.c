@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 13:17:41 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/07 08:14:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
 		line = readline("minishell$ ");
-		if (line && *line)
+		if (line && *line && ft_is_space(line) == 0)
 		{
 			add_history(line);
 			ft_run_code(line, &state, &tokens);
@@ -118,6 +118,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		ft_free(line);
 	}
-	ft_done(&state);
+	done(&state);
 	return (0);
 }
