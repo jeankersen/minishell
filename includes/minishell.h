@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/28 11:22:40 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:51:03 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@
 # define N_TOKEN_ERR 14
 # define M_TOKENS_ERR "minishell: syntax error near unexpected token `||'\n"
 # define N_TOKENS_ERR 15
-#define MAX_INPUT_LENGTH 1024 // Juin -- -- --
-#define ANSI_COLOR_MAGENTA   "\x1b[36m"
-#define ANSI_COLOR_YELLOW  "\x1b[33m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define SIGTERM 15
+# define MAX_INPUT_LENGTH 1024 // Juin -- -- --
+# define ANSI_COLOR_MAGENTA   "\x1b[36m"
+# define ANSI_COLOR_YELLOW  "\x1b[33m"
+# define ANSI_COLOR_RESET   "\x1b[0m"
+# define ANSI_COLOR_BLUE    "\x1b[34m"
+# define ANSI_COLOR_GREEN   "\x1b[32m"
+# define SIGTERM 15
 // Error control
 extern int			g_status;
 
@@ -199,18 +199,25 @@ int					ft_get_nb_cmds_pipe(t_node *list);
 void				ft_cd(t_state *state);
 char				*ft_cat_env_value(char **env, char *path, int plus);
 char				*ft_free_3_ret(char *to_free_1, char *to_free_2,
-char 				*to_free_3, char *to_return);
+						char *to_free_3, char *to_return);
 
-						void ft_view_node(t_node *tokens);
-				void		ft_view_tcmd(t_cmd *cmd);
+void				ft_view_node(t_node *tokens);
+void				t_view_tcmd(t_cmd *cmd);
 
-				void	ft_sigint_handler(int signum);
-				void	ft_heredoc(void);
-				void ft_view_state(t_state *state);
-				void	signal_heredoc(int sig);
-				void	min_shell_err(t_state *state, char *cmd, char *msg, int err);
-				void	err_mini(t_state *state, char *arg, char *msg_error, int err);
-				void	err_mini_exit(t_state *state, char *arg, char *msg_error, int err);
-				void	ft_done(t_state *state);
-				void	ft_var_to_val_mor(char *new, char **table, int i);
+void				ft_sigint_handler(int signum);
+void				ft_heredoc(void);
+void				ft_view_state(t_state *state);
+void				signal_heredoc(int sig);
+void				min_shell_err(t_state *state, char *cmd,
+						char *msg, int err);
+void				err_mini(t_state *state, char *arg,
+						char *msg_error, int err);
+void				err_mini_exit(t_state *state, char *arg,
+						char *msg_error, int err);
+int					ft_str_size(char *str);
+void				done(t_state *state);
+void				ft_cd_mor(t_state *state);
+void				ft_command_exit_more(t_state *state, char *run_command);
+void				ft_var_to_val_mor(char *new, char **table, int i);
+int					ft_get_tokens_mor(t_state *state, char *args, int i);
 #endif
