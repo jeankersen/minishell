@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:29:36 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:54:11 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/07 10:03:06 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,19 @@ int	ft_create_token(char *args, int i, int start, t_node *list)
 //  index of the next character
 //  If we didn't find the matching end quote,
 //  print an error message and return -1
-int	ft_quotes(char *args, int i)
+int	ft_quotes(char *args, int i,  t_state *state)
 {
 	char	quote;
 
 	quote = args[i++];
+	//printf("\n quote: %c\n", quote);
 	while (args[i] && args[i] != quote)
 		i++;
 	if (args[i])
 		return (i + 1);
 	printf("minishell: Unclosed quotes\n");
-	g_status = 2;
+	g_status = 1;
+	state->error++;
 	return (-1);
 }
 
@@ -68,17 +70,6 @@ int	ft_quotes(char *args, int i)
 //  create a new token from the substring
 // - between the last separator and the end of the string
 // call ft_lst_add_back to create a new token from the remaining substring
-int	ft_get_tokens_mor(t_state *state, char *args, int i)
-{
-	i = ft_quotes(args, i);
-	if (i == -1)
-	{
-		state->error++;
-		return (0);
-	}
-	return (1);
-}
-
 t_node	*ft_get_tokens(char *args, t_state *state)
 {
 	t_node	*tmp;
@@ -91,8 +82,11 @@ t_node	*ft_get_tokens(char *args, t_state *state)
 	while (args && args[++i])
 	{
 		if (args[i] == '\"' || args[i] == '\'')
-			if (ft_get_tokens_mor(state, args, i) == 0)
+		{
+			i = ft_quotes(args, i, state);
+			if (i == -1)
 				break ;
+		}
 		if (ft_is_splitable(args[i]))
 		{
 			i = ft_create_token(args, i, start, tmp);
