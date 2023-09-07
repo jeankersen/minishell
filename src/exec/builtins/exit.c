@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:22:15 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:03:20 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/06 08:40:30 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	ft_isdigit_str(char *str)
 
 void	ft_command_exit_more(t_state *state, char *run_command)
 {
-	if (ft_isdigit_str(&run_command[1]) == 0)
+	if (ft_isdigit_str(run_command) == 0)
 	{
-		err_mini_exit(state, &run_command[1], "numeric argument required\n",
+		err_mini_exit(state, run_command, "numeric argument required\n",
 			255);
 		state->stop = STOP;
 	}
