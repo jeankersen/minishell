@@ -47,7 +47,7 @@ int	ft_str_size(char *str)
 	return (count);
 }
 
-void	ft_done(t_state *state)
+void	done(t_state *state)
 {
 	ft_free_str_table(state->g_env);
 	rl_clear_history();
