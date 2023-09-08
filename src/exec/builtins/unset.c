@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:03:56 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/18 08:04:33 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:24:42 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,21 @@ int	ft_delete_env_utils(t_state *state, char **env_name, int i)
 }
 
 int	ft_delete_env(t_state *state, char **env_name)
+{
+	int	i;
+
+	if (!env_name[1])
+		return (-1);
+	i = 1;
+	while (i < ft_arr_size(env_name))
+	{
+		ft_delete_env_utils(state, env_name, i);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_delete_env_for_cd(t_state *state, char **env_name)
 {
 	int	i;
 
