@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 13:03:56 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/09/07 15:40:11 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:24:42 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,22 @@ int	ft_delete_env(t_state *state, char **env_name)
 	while (i < ft_arr_size(env_name))
 	{
 		ft_delete_env_utils(state, env_name, i);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_delete_env_for_cd(t_state *state, char **env_name)
+{
+	int	i;
+
+	if (!env_name[1])
+		return (-1);
+	i = 1;
+	while (i < ft_arr_size(env_name))
+	{
+		if (ft_delete_env_utils(state, env_name, i) == -1)
+			return (-1);
 		i++;
 	}
 	return (1);
