@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/09/05 15:51:03 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/09/08 08:25:20 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,4 +220,5 @@ void				ft_cd_mor(t_state *state);
 void				ft_command_exit_more(t_state *state, char *run_command);
 void				ft_var_to_val_mor(char *new, char **table, int i);
 int					ft_get_tokens_mor(t_state *state, char *args, int i);
+int					ft_is_space(char *line);
 #endif
