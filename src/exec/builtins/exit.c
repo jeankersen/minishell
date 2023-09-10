@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:22:15 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:24:49 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/06 08:40:30 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,29 @@ int	ft_isdigit_str(char *str)
 	return (1);
 }
 
+void	ft_command_exit_more(t_state *state, char *run_command)
+{
+	if (ft_isdigit_str(run_command) == 0)
+	{
+		err_mini_exit(state, run_command, "numeric argument required\n",
+			255);
+		state->stop = STOP;
+	}
+	else if (ft_arr_size(&run_command) > 2)
+	{
+		err_mini_exit(state, NULL, "too many arguments\n", 1);
+		g_status = 256;
+	}
+	else
+	{
+		state->stop = STOP;
+	}
+}
+
 void	ft_command_exit(t_state *state, char **run_command)
 {
-	state->stop = STOP;
+	if (state->nb_cmds == 1)
+		ft_putstr_fd("exit\n", 2);
 	if (ft_arr_size(run_command) == 2)
 	{
 		if ((run_command[1][0] == '-' && ft_isdigit_str(run_command[1]
@@ -43,8 +63,14 @@ void	ft_command_exit(t_state *state, char **run_command)
 		}
 		else
 		{
-			ft_putstr_fd(M_NUMBER_ARG_ERR, 2);
+			err_mini_exit(state, run_command[1], "numeric argument required\n",
+				255);
 			g_status = 255;
 		}
+		state->stop = STOP;
+	}
+	else
+	{
+		ft_command_exit_more(state, run_command[1]);
 	}
 }

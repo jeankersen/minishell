@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:24:12 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/07/26 09:27:07 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:00:30 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_execve(t_state *state)
 	ft_execve_get_path(state, i);
 	if (!state->cmds[i].cmd)
 	{
-		ft_minishell_err(state, M_PATH_ERR, N_PATH_ERR);
+		err_mini(state, state->cmds[i].cmd_args[0], M_PATH_ERR, N_PATH_ERR);
 		ft_close_fd();
 		exit(errno);
 	}

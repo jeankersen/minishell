@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_commands.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:51:56 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/31 16:33:01 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:23:29 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	*ft_clean_quotes(char *str)
 	return (str);
 }
 
-/// @brief 
-/// @param state 
-/// @param i 
-/// @param table 
+/// @brief
+/// @param state
+/// @param i
+/// @param table
 /// @todo: On line: if (ft_strcmp(table[0], "echo") != 0),
 ///		we should check instead if the table[j] before is quotted,
 ///		if so, we sould not clean the space using ft_clean_space_str.
@@ -70,13 +70,6 @@ void	ft_add_commands_clean(t_state *state, int i, char **table)
 
 void	ft_add_commands_redirection_while(t_state *state, t_cmd *cmd, int i)
 {
-	if ((cmd->cmd_args[0] && ft_strncmp(cmd->cmd_args[0], "||\0",
-				3) == 0)
-		|| (ft_arr_size(cmd->cmd_args) == 0 && state->nb_cmds == 1))
-	{
-		ft_minishell_err(state, M_UNXPTD_TOKEN_ERR, N_UNXPTD_TOKEN_ERR);
-		return ;
-	}
 	if (cmd->redirect[cmd->i_redi] == 1)
 	{
 		state->index = i;
@@ -88,7 +81,9 @@ void	ft_add_commands_redirection_while(t_state *state, t_cmd *cmd, int i)
 		ft_two_greater_than(state, 0);
 	}
 	if (ft_arr_size(cmd->t_redirection) > 0 && cmd->redirect[cmd->i_redi] == 2)
+	{
 		ft_create_herodoc(state, i);
+	}
 }
 
 void	ft_add_commands_redirection(t_state *state, t_cmd *cmd, int i)

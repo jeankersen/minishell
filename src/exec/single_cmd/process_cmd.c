@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:21:31 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:00:32 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:13:51 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	ft_process_cmd_fork(t_state *state)
 void	ft_process_command(t_state *state)
 {
 	state->index = 0;
-	ft_on_redirection(state);
-	if (ft_run_builtin(state) == 0)
-		ft_process_cmd_fork(state);
+	if (state->error == 0)
+	{
+		ft_on_redirection(state);
+		if (ft_run_builtin(state) == 0)
+			ft_process_cmd_fork(state);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_commands_funcs.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:53:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/24 13:48:02 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:08:55 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*ft_var_to_val(t_state *state, int *num, int j, int i)
 	t_cmd	*cmd;
 
 	cmd = &state->cmds[i];
+	if (ft_is_only_char(cmd->cmd_args[j], '$') == 1)
+		return (cmd->cmd_args[j]);
 	table = ft_split(cmd->cmd_args[j], '$');
 	if (!ft_strncmp(table[0], "?", 1))
 		return (ft_itoa(g_status));
@@ -95,8 +97,7 @@ char	*ft_var_to_val(t_state *state, int *num, int j, int i)
 	i = -1;
 	while (++i < num[4])
 	{
-		ft_str_to_str(new, table[i]);
-		ft_free(table[i]);
+		ft_var_to_val_mor(new, table, i);
 	}
 	ft_free(table);
 	return (new);
@@ -117,7 +118,6 @@ void	ft_handle_env_varibles(t_state *state, int i, int j)
 		num[1] = j;
 		num[2] = 0;
 		new = ft_var_to_val(state, num, j, i);
-		ft_free(cmd->cmd_args[j]);
 		cmd->cmd_args[j] = new;
 	}
 }

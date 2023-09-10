@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/24 13:50:33 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/08 08:45:13 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		g_status;
 
 /// @brief 	Increments SHLVL each time a state is initialized
-/// @param state 
+/// @param state
 void	ft_shlvl_increment(t_state *state)
 {
 	char	**past;
@@ -54,16 +54,16 @@ void	ft_sigint_handler(int signum)
 			ft_add_info_commands(state); 	Handle redirection/heredocs...
 			ft_run_commands(state);      	Run...
 			ft_update_g_status(); 			Update error code
-			ft_check_exit(state);        	Clean used memory & fds of last cmd  
- * @param 	*line: 
- * @param 	*state: 
- * @param 	*tokens: 
+			ft_check_exit(state);        	Clean used memory & fds of last cmd
+ * @param 	*line:
+ * @param 	*state:
+ * @param 	*tokens:
  * @retval	None
 */
 void	ft_run_code(char *line, t_state *state, t_node *tokens)
 {
 	state->error = 0;
-	tokens = ft_get_tokens(line);
+	tokens = ft_get_tokens(line, state);
 	state->nb_cmds = ft_get_nb_cmds_pipe(tokens);
 	if (ft_unexptd_token_check(tokens) == 0
 		&& state->nb_cmds > 0 && state->error == 0)
@@ -81,7 +81,6 @@ void	ft_run_code(char *line, t_state *state, t_node *tokens)
 
 void	ft_init_state(t_state *state, char **envp)
 {
-	state->g_env = NULL;
 	state->g_env = ft_get_env(envp, 1, -1);
 	state->t_redirection = NULL;
 	state->cmds = NULL;
@@ -101,6 +100,7 @@ int	main(int argc, char **argv, char **envp)
 	t_node	tokens;
 	char	*line;
 
+	line = NULL;
 	(void)argc;
 	(void)argv;
 	ft_init_state(&state, envp);
@@ -109,7 +109,7 @@ int	main(int argc, char **argv, char **envp)
 		signal(SIGINT, ft_sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
 		line = readline("minishell$ ");
-		if (line && *line)
+		if (line && *line && ft_is_space(line) == 0)
 		{
 			add_history(line);
 			ft_run_code(line, &state, &tokens);
@@ -118,8 +118,6 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		ft_free(line);
 	}
-	ft_free_str_table(state.g_env);
-	rl_clear_history();
-	exit(state.error);
+	done(&state);
 	return (0);
 }

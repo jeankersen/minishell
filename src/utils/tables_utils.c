@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tables_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:04:41 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/18 08:01:07 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:55:17 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ char	*ft_find_env_value(char **envp, char *path)
 int	ft_is_splitable(char c)
 {
 	if (c == ' ' || c == '<' || c == '>' || c == '|')
+	{
 		return (1);
+	}
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/24 13:48:02 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:53:29 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // N is the number and M is the message
 # define STOP 1
 # define NO_ERROR 0
-# define M_PATH_ERR "minishell: command not found\n"
+# define M_PATH_ERR " command not found\n"
 # define N_PATH_ERR 1
 # define M_EXECVE_ERR "minishell: execution error\n"
 # define N_EXECVE_ERR 2
@@ -55,7 +55,13 @@
 # define N_TOKEN_ERR 14
 # define M_TOKENS_ERR "minishell: syntax error near unexpected token `||'\n"
 # define N_TOKENS_ERR 15
-
+# define MAX_INPUT_LENGTH 1024 // Juin -- -- --
+# define ANSI_COLOR_MAGENTA   "\x1b[36m"
+# define ANSI_COLOR_YELLOW  "\x1b[33m"
+# define ANSI_COLOR_RESET   "\x1b[0m"
+# define ANSI_COLOR_BLUE    "\x1b[34m"
+# define ANSI_COLOR_GREEN   "\x1b[32m"
+# define SIGTERM 15
 // Error control
 extern int			g_status;
 
@@ -104,7 +110,7 @@ int					ft_unexptd_token_check(t_node *list);
 
 // -- split
 int					ft_is_splitable(char c);
-t_node				*ft_get_tokens(char *args);
+t_node				*ft_get_tokens(char *args, t_state *state);
 
 // -- ft_minishell
 void				ft_create_cmds_array(t_state *state);
@@ -194,4 +200,26 @@ void				ft_cd(t_state *state);
 char				*ft_cat_env_value(char **env, char *path, int plus);
 char				*ft_free_3_ret(char *to_free_1, char *to_free_2,
 						char *to_free_3, char *to_return);
+
+void				ft_view_node(t_node *tokens);
+void				t_view_tcmd(t_cmd *cmd);
+
+void				ft_sigint_handler(int signum);
+void				ft_heredoc(void);
+void				ft_view_state(t_state *state);
+void				signal_heredoc(int sig);
+void				min_shell_err(t_state *state, char *cmd,
+						char *msg, int err);
+void				err_mini(t_state *state, char *arg,
+						char *msg_error, int err);
+void				err_mini_exit(t_state *state, char *arg,
+						char *msg_error, int err);
+int					ft_str_size(char *str);
+void				done(t_state *state);
+void				ft_cd_mor(t_state *state);
+void				ft_command_exit_more(t_state *state, char *run_command);
+void				ft_var_to_val_mor(char *new, char **table, int i);
+int					ft_get_tokens_mor(t_state *state, char *args, int i);
+int					ft_is_space(char *line);
+int					ft_delete_env_for_cd(t_state *state, char **env_name);
 #endif

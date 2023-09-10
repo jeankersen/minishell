@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_funcs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:21:32 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:30:19 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:19:25 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	ft_cmd_args_in_red_divi(t_state *state, int i, int *start)
 	{
 		state->cmds[i].cmd_args = NULL;
 		ft_minishell_err(state, M_UNXPTD_TOKEN_ERR, N_UNXPTD_TOKEN_ERR);
+		state->error++;
 		return ;
 	}
 	position_redi++;

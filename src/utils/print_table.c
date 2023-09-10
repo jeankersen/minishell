@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:00 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/31 15:12:12 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:57:49 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /// @brief Print a str array
 /// @param str -> the value to print
-/// @param new_line -> if 0, print without nl(\n), if 1, 
+/// @param new_line -> if 0, print without nl(\n), if 1,
 ///	print a nl(\n) between each values, if 2, a nl(\n) at the end only
 void	ft_print_table(char **str, int new_line)
 {
