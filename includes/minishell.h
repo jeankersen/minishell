@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/09/08 08:25:20 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/07 16:53:23 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@
 # define N_UNXPTD_TOKEN_ERR 12
 # define M_EXPORT_ERR "minishell: export: not a valid identifier\n"
 # define N_EXPORT_ERR 13
-# define M_TOKEN_ERR "minishell: syntax error near unexpected token `|'\n"
+# define M_TOKEN_ERR "minishell: syntax error near unexpected token '|'\n"
 # define N_TOKEN_ERR 14
-# define M_TOKENS_ERR "minishell: syntax error near unexpected token `||'\n"
+# define M_TOKENS_ERR "minishell: syntax error near unexpected token '||'\n"
 # define N_TOKENS_ERR 15
 # define MAX_INPUT_LENGTH 1024 // Juin -- -- --
 # define ANSI_COLOR_MAGENTA   "\x1b[36m"
@@ -221,4 +221,49 @@ void				ft_command_exit_more(t_state *state, char *run_command);
 void				ft_var_to_val_mor(char *new, char **table, int i);
 int					ft_get_tokens_mor(t_state *state, char *args, int i);
 int					ft_is_space(char *line);
+int ft_str_len_node(t_node *list);
+void	ft_sigint_handler_more(int signum);
+void get_double_sign_away(char *s);
+int more_then_two_dollar(char *str);
+void delete_by_index(char *s, size_t index);
+char* extract_after_index(char *s, size_t index);
+char* extract_before_index(char *s, size_t index);
 #endif
+//run_command = state->cmds[state->index].cmd_args;
+
+/*
+
+
+void traiterDoublonsConsecutifs(char tableau[], char doublon) {
+    int taille = strlen(tableau);
+    if (taille <= 1) {
+        return;  // Rien à faire si le tableau a 0 ou 1 élément
+    }
+
+    int indexEcriture = 0;
+    int compteur = 1; // Initialisé à 1 car il y a au moins un caractère dans le tableau
+
+    for (int i = 1; i < taille; i++) {
+        if (tableau[i] == tableau[i - 1] && tableau[i] == doublon) {
+            compteur++;
+        } else {
+            if (compteur % 2 == 1) {
+                tableau[indexEcriture++] = tableau[i - 1];
+            } else {
+                tableau[indexEcriture++] = '+';
+            }
+            compteur = 1;
+        }
+    }
+
+    // Gestion du dernier caractère
+    if (compteur % 2 == 1) {
+        tableau[indexEcriture++] = tableau[taille - 1];
+    } else {
+        tableau[indexEcriture++] = '+';
+    }
+
+    tableau[indexEcriture] = '\0'; // Ajoute la fin de chaîne
+}
+
+*/
