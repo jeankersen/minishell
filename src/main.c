@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/09/08 08:45:13 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:28:11 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ void	ft_shlvl_increment(t_state *state)
 		ft_free_str_table(past);
 		ft_free(str_num);
 	}
+}
+
+void	ft_ha_sig(int sig)
+{
+	(void)sig;
+	printf("\n Hello World\n");
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_status = 130;
 }
 
 void	ft_sigint_handler(int signum)

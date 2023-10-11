@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:45:30 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:01:10 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:25:07 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_run_commands(t_state *state)
 {
 	int	n_cmd_bfr_pipes;
 
+	signal(SIGQUIT, ft_sigint_handler_more);
 	state->save_stdout = dup(STDOUT_FILENO);
 	state->save_stdin = dup(STDIN_FILENO);
 	n_cmd_bfr_pipes = ft_stop_pipe(state);

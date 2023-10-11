@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:53:42 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 15:09:51 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:36:29 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	done(t_state *state)
 
 void	ft_var_to_val_mor(char *new, char **table, int i)
 {
-	ft_str_to_str(new, table[i]);
-	ft_free(table[i]);
+	int		j;
+
+	j = -1;
+	while (++j < i)
+	{
+		ft_str_to_str(new, table[j]);
+		ft_free(table[j]);
+	}
 }

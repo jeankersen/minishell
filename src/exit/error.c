@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:17:27 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:16:13 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:26:27 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,18 @@ extern int	g_status;
 
 void	ft_update_g_status(void)
 {
-	g_status /= 256;
-	if (g_status == 9)
-		g_status = 127;
+	if (g_status == 3)
+		g_status = 131;
+	else if (g_status == 2)
+		g_status = 130;
+	else if (g_status == 258)
+		g_status = 258;
+	else
+	{
+		g_status /= 256;
+		if (g_status == 9)
+			g_status = 127;
+	}
 }
 
 void	ft_minishell_err(t_state *state, char *msg, int err)

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:35:48 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:12:22 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:50:28 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_run_one_child(t_state *state, int *fd)
 		dup2(fd[1], STDOUT_FILENO);
 	}
 	ft_on_redirection(state);
-	if (ft_run_builtin(state) == 0)
+	if (ft_run_builtin(state) == 0 && state->error == 0)
 	{
 		ft_run_execve(state);
 	}

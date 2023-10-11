@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:04:46 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:58:00 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:36:09 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,19 @@ int	ft_str_in_str(char *str, char *find)
 		i++;
 	}
 	return (-1);
+}
+
+int	ft_str_len_node(t_node *list)
+{
+	t_node	*token;
+	int		i;
+
+	i = -1;
+	token = ft_get_first_node(list);
+	while (token)
+	{
+		i++;
+		token = token->next;
+	}
+	return (i);
 }

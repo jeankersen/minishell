@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:51:56 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:23:29 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/08 15:25:48 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void	ft_add_commands_clean(t_state *state, int i, char **table)
 			table[j] = path;
 		}
 		if (modife == 1)
+		{
 			ft_handle_env_varibles(state, i, j);
+		}
 		j++;
 	}
 }

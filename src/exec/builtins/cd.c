@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:21:10 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 13:51:31 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/09 17:02:40 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	ft_cd_utils(t_state *state)
 
 	tmp = calloc(sizeof(char *), 3);
 	tmp_cmd = ft_strdup("OLDPWD");
-	ft_delete_env(state, &tmp_cmd);
+	ft_delete_env_for_cd(state, &tmp_cmd);
 	tmp[0] = ft_find_env_value(state->g_env, "PWD=");
 	tmp[1] = ft_strjoin("OLDPWD=", tmp[0]);
 	ft_add_env(state, tmp, 1);
 	tmp[1] = ft_free(tmp[1]);
 	tmp_cmd = ft_free(tmp_cmd);
 	tmp_cmd = ft_strdup("PWD");
-	ft_delete_env(state, &tmp_cmd);
+	ft_delete_env_for_cd(state, &tmp_cmd);
 	tmp[0] = getcwd(NULL, 0);
 	tmp[1] = ft_strjoin("PWD=", tmp[0]);
 	ft_add_env(state, tmp, 1);
@@ -79,8 +79,6 @@ void	ft_cd(t_state *state)
 		if (chdir(path) == 0)
 			ft_cd_utils(state);
 		else
-		{
 			ft_cd_mor(state);
-		}
 	}
 }

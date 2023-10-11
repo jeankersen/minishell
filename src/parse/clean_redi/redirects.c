@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:59:00 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/08/31 14:34:20 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:13:46 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_less_than(t_state *state)
 	if (cmd->t_redirection[pos] && access(cmd->t_redirection[pos], F_OK) == -1)
 	{
 		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
+		state->error++;
+		g_status = 256;
 		return ;
 	}
 	cmd->fd_file = open(cmd->t_redirection[pos], O_RDONLY, 0644);
@@ -71,9 +73,7 @@ void	ft_two_less_than(t_state *state)
 	ft_free(tmp_file_id);
 	cmd->fd_file = open(file, O_RDONLY, 0644);
 	if (cmd->fd_file < 0)
-	{
 		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
-	}
 	ft_free(file);
 	dup2(cmd->fd_file, STDIN_FILENO);
 }
@@ -91,7 +91,9 @@ void	ft_two_greater_than(t_state *state, int is_dup2)
 			0644);
 	if (cmd->fd_file < 0)
 	{
-		ft_minishell_err(state, M_NO_FILE_DIR_ERR, N_NO_FILE_DIR_ERR);
+		err_mini(state, cmd->t_redirection[cmd->i_redi],M_TOKENS_ERR_F, N_TOKENS_ERR_F);
+		g_status = 256;
+		printf("\n g_sst %d\n", g_status);
 		return ;
 	}
 	if (is_dup2 == 1)

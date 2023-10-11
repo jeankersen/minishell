@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_ms.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:25:15 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 14:28:07 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:17:41 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_free_commands(t_state *state)
 	{
 		return ;
 	}
-	while (i < state->nb_cmds)
+	while (i < state->nb_cmds && state->error == 0)
 	{
 		ft_free_commands_table(state->cmds[i].cmd_args);
 		ft_delete_herodoc(&state->cmds[i]);
