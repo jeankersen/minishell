@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/07 16:53:23 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:06:46 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
+ #include <sys/ioctl.h>
 
 // Error control,
 // N is the number and M is the message
@@ -55,6 +56,8 @@
 # define N_TOKEN_ERR 14
 # define M_TOKENS_ERR "minishell: syntax error near unexpected token '||'\n"
 # define N_TOKENS_ERR 15
+# define M_TOKENS_ERR_F "Permission denied\n"
+# define N_TOKENS_ERR_F 16
 # define MAX_INPUT_LENGTH 1024 // Juin -- -- --
 # define ANSI_COLOR_MAGENTA   "\x1b[36m"
 # define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -221,49 +224,24 @@ void				ft_command_exit_more(t_state *state, char *run_command);
 void				ft_var_to_val_mor(char *new, char **table, int i);
 int					ft_get_tokens_mor(t_state *state, char *args, int i);
 int					ft_is_space(char *line);
-int ft_str_len_node(t_node *list);
-void	ft_sigint_handler_more(int signum);
-void get_double_sign_away(char *s);
-int more_then_two_dollar(char *str);
-void delete_by_index(char *s, size_t index);
-char* extract_after_index(char *s, size_t index);
-char* extract_before_index(char *s, size_t index);
+int					ft_str_len_node(t_node *list);
+void				ft_sigint_handler_more(int signum);
+void				get_double_sign_away(char *s);
+int					more_then_two_dollar(char *str);
+void				delete_by_index(char *s, size_t index);
+char				*extract_after_index(char *s, size_t index);
+char				*extract_before_index(char *s, size_t index);
+int					count_double_dollar(char *str);
+void				get_double_sign_away(char *str);
+void				re_arrange_table_double(t_state *state, char **s, int *num);
+char				*re_arrange_table(t_state *state, char *s, int *num);
+int					count_dollar(char *str);
+char				*ft_modif(char *cmd_args, char **env, int j);
+int					ft_is_delete(t_state *state, int *num, char *tmp);
+void				ft_check_other_pi_more(t_state *state,
+						t_node *temp, int i, int j);
+int					ft_delete_env_for_cd(t_state *state, char **env_name);
+void				ft_ha_sig(int sig);
+void				ft_handle_heredoc(int signum);
+char				*ft_var_first_cond(t_state *state, char *, int *num);
 #endif
-//run_command = state->cmds[state->index].cmd_args;
-
-/*
-
-
-void traiterDoublonsConsecutifs(char tableau[], char doublon) {
-    int taille = strlen(tableau);
-    if (taille <= 1) {
-        return;  // Rien à faire si le tableau a 0 ou 1 élément
-    }
-
-    int indexEcriture = 0;
-    int compteur = 1; // Initialisé à 1 car il y a au moins un caractère dans le tableau
-
-    for (int i = 1; i < taille; i++) {
-        if (tableau[i] == tableau[i - 1] && tableau[i] == doublon) {
-            compteur++;
-        } else {
-            if (compteur % 2 == 1) {
-                tableau[indexEcriture++] = tableau[i - 1];
-            } else {
-                tableau[indexEcriture++] = '+';
-            }
-            compteur = 1;
-        }
-    }
-
-    // Gestion du dernier caractère
-    if (compteur % 2 == 1) {
-        tableau[indexEcriture++] = tableau[taille - 1];
-    } else {
-        tableau[indexEcriture++] = '+';
-    }
-
-    tableau[indexEcriture] = '\0'; // Ajoute la fin de chaîne
-}
-
-*/
