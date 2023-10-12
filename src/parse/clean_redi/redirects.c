@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:59:00 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/11 15:13:46 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 08:39:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void	ft_two_greater_than(t_state *state, int is_dup2)
 			0644);
 	if (cmd->fd_file < 0)
 	{
-		err_mini(state, cmd->t_redirection[cmd->i_redi],M_TOKENS_ERR_F, N_TOKENS_ERR_F);
+		err_mini(state, cmd->t_redirection[cmd->i_redi],
+			M_TOKENS_ERR_F, N_TOKENS_ERR_F);
 		g_status = 256;
 		printf("\n g_sst %d\n", g_status);
 		return ;

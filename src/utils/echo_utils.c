@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:48:53 by jvillefr          #+#    #+#             */
-/*   Updated: 2023/10/10 18:36:24 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 08:42:44 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,7 @@ int	count_double_dollar(char *str)
 	while (str[i] != '\0')
 	{
 		if (str[i] == str[i + 1] && str[i] == '$')
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -84,19 +82,7 @@ void	ft_sigint_handler_more(int signum)
 
 void	ft_handle_heredoc(int signum)
 {
-	//(void)signum;
-	//printf("ft_sigint_handler_more \n");
-	//write(1, "\n", 1);
-	//rl_on_new_line();
-	//rl_replace_line("", 0);
-	//rl_redisplay();
-	//g_status = 1;
-	//printf("\n %d\n", g_status);
-	//exit(1);
-		(void)signum;
-
-	//rl_on_new_line();
+	(void)signum;
 	ioctl(0, TIOCSTI, "\n");
 	g_status = 256;
-	//exit(signum);
 }

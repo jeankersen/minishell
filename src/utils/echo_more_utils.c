@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:48:53 by jvillefr          #+#    #+#             */
-/*   Updated: 2023/10/11 12:59:36 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 08:41:48 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	re_arrange_table_double(t_state *state, char **s, int *num)
 	char	**table;
 
 	i = -1;
-	//j = 0;
 	while (s[++i])
 	{
 		if (count_dollar(s[i]) >= 1)
@@ -114,5 +113,3 @@ char	*re_arrange_table(t_state *state, char *s, int *num)
 	ft_free(table);
 	return (new);
 }
-
-

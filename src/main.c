@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/11 15:28:11 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 10:42:18 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ void	ft_shlvl_increment(t_state *state)
 	}
 }
 
-void	ft_ha_sig(int sig)
-{
-	(void)sig;
-	printf("\n Hello World\n");
-	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-	g_status = 130;
-}
-
 void	ft_sigint_handler(int signum)
 {
 	(void)signum;
@@ -55,10 +44,10 @@ void	ft_sigint_handler(int signum)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_status = 130;
+	g_status = 1;
 }
 
-/**
+/*
  * @brief	Where all variables are initialized, parsed and treated
  * @note	ft_check_pipes(state);          Checks if pipe use is legit...
 			ft_create_cmds_array(state); 	Init state->cmds...
