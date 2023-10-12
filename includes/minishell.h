@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/11 15:06:46 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 08:45:19 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
- #include <sys/ioctl.h>
+# include <sys/ioctl.h>
 
 // Error control,
 // N is the number and M is the message
@@ -243,5 +243,5 @@ void				ft_check_other_pi_more(t_state *state,
 int					ft_delete_env_for_cd(t_state *state, char **env_name);
 void				ft_ha_sig(int sig);
 void				ft_handle_heredoc(int signum);
-char				*ft_var_first_cond(t_state *state, char *, int *num);
+char				*ft_var_first_cond(t_state *state, char *s, int *num);
 #endif
