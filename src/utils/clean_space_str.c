@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_space_str.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 21:05:03 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/05/16 12:17:10 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:25:20 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,25 @@ char	*ft_clean_space_str(char *str)
 		return (new);
 	ft_clean_space_str_create_new(clean, new, str);
 	return (new);
+}
+
+void	replace_quotes(char *str)
+{
+	int		length;
+	int		i;
+
+	i = 0;
+	length = ft_strlen(str);
+	while (i < length)
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			str[i] = '$';
+			ft_memmove(&str[i + 2], &str[i + 1], length - i);
+			str[i + 1] = '$';
+			length++;
+			i++;
+		}
+		i++;
+	}
 }

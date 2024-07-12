@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:48:53 by jvillefr          #+#    #+#             */
-/*   Updated: 2023/10/12 08:41:48 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:11:03 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ char	*take_off_first_el(char *s)
 
 char	*put_status(char *str)
 {
-	int		i;
 	char	*s;
 	char	*new;
 
-	i = 0;
 	new = NULL;
 	new = ft_itoa(g_status);
 	if (ft_strlen(str) > 1)

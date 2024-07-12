@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:48:53 by jvillefr          #+#    #+#             */
-/*   Updated: 2023/10/12 08:42:44 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:59:33 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ int	count_dollar(char *str)
 
 int	count_double_dollar(char *str)
 {
-	int		occ;
 	int		i;
 
 	i = 0;
-	occ = 0;
 	while (str[i] != '\0')
 	{
 		if (str[i] == str[i + 1] && str[i] == '$')

@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:51:56 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/08 15:25:48 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:24:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_add_commands_clean(t_state *state, int i, char **table)
 	{
 		if (table[j][0] == '\'')
 			modife = 0;
-		table[j] = ft_clean_quotes(table[j]);
+		replace_quotes(table[j]);
 		if (ft_strcmp(table[0], "echo") != 0)
 		{
 			path = ft_clean_space_str(table[j]);

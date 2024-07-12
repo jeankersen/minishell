@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 09:18:13 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/12 08:01:00 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:21:38 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,11 @@ void	ft_create_cmds_array(t_state *state)
 		i++;
 	}
 }
-
 /*
+
+
+
+
 void ft_view_tcmd(t_cmd *cmd)
 {
 
@@ -195,4 +198,5 @@ void ft_view_node(t_node *list)
              token = token->next;
           }
 }
+
 */

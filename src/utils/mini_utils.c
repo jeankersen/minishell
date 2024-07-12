@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:53:42 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/09 10:36:29 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:25:00 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_is_space(char *line)
 	i = 0;
 	j = 0;
 	size = ft_strlen(line);
-	while (line[i] != '\0')
+	while (line[i])
 	{
 		if (line[i] == ' ' || line[i] == '\t')
 			j++;
@@ -63,5 +63,20 @@ void	ft_var_to_val_mor(char *new, char **table, int i)
 	{
 		ft_str_to_str(new, table[j]);
 		ft_free(table[j]);
+	}
+}
+
+void	skip_tab(char *s)
+{
+	size_t	start;
+	size_t	size;
+
+	if (s != NULL && (s[0] == '\t' || s[0] == ' '))
+	{
+		size = ft_strlen(s);
+		start = 1;
+		while (start < size && (s[start] == '\t' || s[start] == ' '))
+			start++;
+		ft_memmove(s, s + start, size - start + 1);
 	}
 }

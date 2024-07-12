@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:35:48 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/08 15:50:28 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:51:54 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_wait_childs(t_state *state)
 	state->index = 0;
 	while (state->index < state->nb_cmds)
 	{
+		signal(SIGINT, SIG_IGN);
 		waitpid(state->pid[state->index], &g_status, 0);
 		state->index++;
 	}

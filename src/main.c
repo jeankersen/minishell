@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:50:40 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/12 10:42:18 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 12:37:34 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_sigint_handler(int signum)
 void	ft_run_code(char *line, t_state *state, t_node *tokens)
 {
 	state->error = 0;
+	skip_tab(line);
 	tokens = ft_get_tokens(line, state);
 	state->nb_cmds = ft_get_nb_cmds_pipe(tokens);
 	if (ft_unexptd_token_check(tokens) == 0
