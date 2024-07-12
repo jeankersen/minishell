@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anshimiy <anshimiy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 23:51:52 by anshimiy          #+#    #+#             */
-/*   Updated: 2022/10/28 17:31:47 by anshimiy         ###   ########.fr       */
+/*   Updated: 2023/10/08 19:10:24 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,34 @@ static unsigned int	ft_get_next_strlen(char **next_str,
 }
 
 char	**ft_split(char const *s, char c)
+{
+	char			**tab;
+	char			*next_str;
+	unsigned int	next_str_len;
+	unsigned int	nb_strs;
+	unsigned int	i;
+
+	i = 0;
+	next_str = (char *)s;
+	next_str_len = 0;
+	nb_strs = ft_get_nb_strs(s, c);
+	tab = (char **)malloc(sizeof(char *) * (nb_strs + 1));
+	if (!s || !tab)
+		return (NULL);
+	while (i < nb_strs)
+	{
+		next_str_len = ft_get_next_strlen(&next_str, &next_str_len, c);
+		tab[i] = (char *)malloc(sizeof(char) * (next_str_len + 1));
+		if (!tab[i])
+			return (ft_malloc_free(tab));
+		ft_strlcpy(tab[i], next_str, next_str_len + 1);
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
+}
+
+char	**ft_split_dollar(char const *s, char c)
 {
 	char			**tab;
 	char			*next_str;
