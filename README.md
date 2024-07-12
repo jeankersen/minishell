@@ -1,6 +1,10 @@
 42 project, recoding our own little bash. A program capable of parsing a prompt and launching executables with arguments, along with a few built-in functions.
 
 
+<img width="877" alt="Screen Shot 2024-07-12 at 5 29 47 PM" src="https://github.com/user-attachments/assets/aab3c371-56ef-47ef-93d8-26c25e1757f8">
+
+
+
 Available options
 
 Minishell runs executables from an absolute, relative or environment PATH (/bin/ls or ls), including arguments or options. ' and " work the same as bash, except for multiline commands.
