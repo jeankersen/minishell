@@ -6,7 +6,7 @@
 /*   By: jvillefr <jvillefr@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 20:36:28 by anshimiy          #+#    #+#             */
-/*   Updated: 2023/10/12 08:45:19 by jvillefr         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:18:24 by jvillefr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,4 +244,6 @@ int					ft_delete_env_for_cd(t_state *state, char **env_name);
 void				ft_ha_sig(int sig);
 void				ft_handle_heredoc(int signum);
 char				*ft_var_first_cond(t_state *state, char *s, int *num);
+void				skip_tab(char *s);
+void				replace_quotes(char *str);
 #endif
